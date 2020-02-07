@@ -10,6 +10,19 @@ new Vue({
       this.gameIsRunning = true;
       this.playerHealth = 100;
       this.monsterHealth = 100;
+    },
+    attack: function() {
+      var damage = this.calculateDamage(3, 10);
+      this.monsterHealth -= damage;
+      this.turns.unshift({
+        isPlayer: true,
+        text: "Player hits Monster for " + damage
+      });
+      if (this.checkWin()) {
+        return;
+      }
+
+      this.monsterAttacks();
     }
   }
 });
